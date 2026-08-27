@@ -1,0 +1,326 @@
+:root {
+  --ink: #1b1b1f;
+  --paper: #faf9f6;
+  --line: #d8d5cd;
+  --accent: #3d5a80;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* --- Navbar --- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2rem;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.brand span {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Hide the checkbox itself; it only exists to hold open/closed state */
+.nav-toggle-checkbox {
+  display: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  position: relative;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  padding-bottom: 4px;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  width: 100%;
+}
+
+.nav-links a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.cta {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--ink);
+  color: var(--paper) !important;
+  padding: 0.55rem 1.1rem;
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.cta::after { display: none; }
+
+.cta:hover {
+  background: var(--accent);
+}
+
+/* --- Hamburger (hidden on desktop) --- */
+.toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--ink);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Animate hamburger into an X when checkbox is checked */
+.nav-toggle-checkbox:checked ~ .toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle-checkbox:checked ~ .toggle span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle-checkbox:checked ~ .toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.overlay {
+  display: none;
+}
+
+/* --- Responsive breakpoint --- */
+@media (max-width: 720px) {
+  .toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(72vw, 300px);
+    background: var(--paper);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.7rem;
+    padding: 2rem;
+    border-left: 1px solid var(--line);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  /* Slide the panel in when the checkbox is checked */
+  .nav-toggle-checkbox:checked ~ .nav-links {
+    transform: translateX(0);
+  }
+
+  .nav-links a {
+    font-size: 1.1rem;
+  }
+
+  .cta {
+    margin-top: 0.5rem;
+  }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(27, 27, 31, 0.35);
+    z-index: 99;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav-toggle-checkbox:checked ~ .overlay {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-links, .toggle span, .nav-links a::after, .cta {
+    transition: none !important;
+  }
+}
+
+/* --- Skills section --- */
+.skills {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.skills-header {
+  margin-bottom: 3rem;
+}
+
+.eyebrow {
+  display: block;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.skills-header h2 {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 2.1rem;
+  margin: 0;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.skill-card {
+  position: relative;
+  padding: 2rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Accent bar that grows in from the left on hover */
+.skill-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover,
+.skill-card:focus-within {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 24px rgba(27, 27, 31, 0.08);
+}
+
+.skill-card:hover::before,
+.skill-card:focus-within::before {
+  transform: scaleY(1);
+}
+
+.skill-number {
+  display: block;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 0.85rem;
+  color: var(--line);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  transition: color 0.25s ease;
+}
+
+.skill-card:hover .skill-number,
+.skill-card:focus-within .skill-number {
+  color: var(--accent);
+}
+
+.skill-card h3 {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1.25rem;
+  margin: 0 0 0.6rem;
+}
+
+.skill-card p {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #55534d;
+  margin: 0;
+}
+
+/* Mobile: stack to a single column */
+@media (max-width: 720px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-header h2 {
+    font-size: 1.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-card, .skill-card::before, .skill-number {
+    transition: none !important;
+  }
+}
