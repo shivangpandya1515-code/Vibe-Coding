@@ -26,7 +26,6 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 
-
 /.phpunit.cache
 /database/database.sqlite
     
