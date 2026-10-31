@@ -1,0 +1,23 @@
+# Laravel environment and dependencies
+laravel-app/.env
+laravel-app/vendor/
+laravel-app/node_modules/
+
+# Laravel generated files
+laravel-app/storage/*.key
+laravel-app/storage/logs/*
+laravel-app/bootstrap/cache/*
+laravel-app/storage/framework/cache/*
+laravel-app/storage/framework/sessions/*
+laravel-app/storage/framework/views/*
+
+# Python and editor files
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
